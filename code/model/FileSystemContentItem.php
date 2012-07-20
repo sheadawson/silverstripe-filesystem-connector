@@ -36,14 +36,16 @@ class FileSystemContentItem extends ExternalContentItem
 		$this->Created = date('Y-m-d H:i:s', filectime($filePath));
 	}
 
-	public function stageChildren()
+	public function stageChildren($showAll = false)
 	{
 		$filePath = $this->FilePath;
-		$children = new DataObjectSet();
-		
+		$children = new ArrayList();
+
 		if (is_dir($filePath) && is_readable($filePath)) {
+
 			$files = scandir($filePath);
 			foreach ($files as $fname) {
+
 				if ($fname == '.' || $fname == '..') continue;
 
 				$id = $this->source->encodeId($this->externalId . '/' . $fname);
@@ -82,5 +84,16 @@ class FileSystemContentItem extends ExternalContentItem
 		    exit;
 		} 
 	    exit("Failed streaming content");
+	}
+
+
+	/**
+	 * Return the CSS classes to apply to this node in the CMS tree
+	 *
+	 * @return string
+	 */
+	function CMSTreeClasses() {
+		$classes = sprintf('class-%s type-%s', $this->class, $this->getType());
+		return $classes;
 	}
 }

@@ -110,7 +110,7 @@ class FileSystemContentSource extends ExternalContentSource
 		return $this->getObject('/');
 	}
 
-	public function stageChildren()
+	public function stageChildren($showAll = false)
 	{
 		$root = $this->getRoot();
 		return $root ? $root->stageChildren() : null;
