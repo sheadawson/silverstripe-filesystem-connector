@@ -24,6 +24,13 @@ OF SUCH DAMAGE.
 
 class FileSystemContentItem extends ExternalContentItem
 {
+
+	/**
+	 * @var string - icon for cms tree
+	 **/
+	public static $icon = 'cms/images/treeicons/folder-closedfolder.gif';
+
+
 	public function init()
 	{
 		$filePath = realpath($this->source->getFilePath() . $this->externalId);
